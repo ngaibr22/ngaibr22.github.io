@@ -25,11 +25,12 @@ export default function App() {
       <div className="cursor__dot">
         <AnimatedCursor
           innerSize={15}
-          outerSize={15}
-          color="255, 255 ,255"
-          outerAlpha={0.4}
+          outerSize={10}
+          color= "20, 20, 90"
+          outerColor= "40, 10, 90"
+          outerAlpha={0.7}
           innerScale={0.7}
-          outerScale={5}
+          outerScale={3}
         />
       </div>
       <ScrollToTop>

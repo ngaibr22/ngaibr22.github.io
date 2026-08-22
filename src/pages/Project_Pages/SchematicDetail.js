@@ -1,0 +1,158 @@
+import React from "react";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Container, Row, Col } from "react-bootstrap";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { meta } from "../../content_option";
+
+export const SchematicDetail = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { subsystemId } = useParams();
+  const { schematic, projectPath } = location.state || {};
+
+  let currentDetail = schematic;
+
+  // If subsystemId is provided, find the subsystem within the schematic
+  if (subsystemId && schematic?.subsystems) {
+    currentDetail = schematic.subsystems.find((sub) => sub.id === subsystemId);
+  }
+
+  if (!currentDetail) {
+    return (
+      <Container className="About-header mt-5">
+        <h2>Detail page not found</h2>
+        <button
+          onClick={() => navigate(-1)}
+          style={{
+            background: "none",
+            border: "none",
+            color: "var(--text-color)",
+            cursor: "pointer",
+            fontSize: "1rem",
+            textDecoration: "underline",
+          }}
+        >
+          ← Go back
+        </button>
+      </Container>
+    );
+  }
+
+  return (
+    <HelmetProvider>
+      <Container className="About-header">
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>{currentDetail.title} | {meta.title}</title>
+          <meta
+            name="description"
+            content={`${currentDetail.title}: ${currentDetail.description}`}
+          />
+        </Helmet>
+
+        {/* Header with Back Button */}
+        <Row className="mb-5 mt-3 pt-md-3">
+          <Col lg="8">
+            <button
+              onClick={() => navigate(-1)}
+              style={{
+                background: "none",
+                border: "none",
+                color: "var(--text-color)",
+                cursor: "pointer",
+                fontSize: "1rem",
+                marginBottom: "1rem",
+                textDecoration: "underline",
+              }}
+            >
+              ← Back
+            </button>
+            <h1 className="display-4 mb-4">{currentDetail.title}</h1>
+            <hr className="t_border my-4 ml-0 text-left" />
+          </Col>
+        </Row>
+
+        {/* Large Schematic Image */}
+        <Row className="mb-5">
+          <Col lg="12">
+            <div className="schematic_detail_image_container">
+              <img
+                src={currentDetail.detailImg || currentDetail.img}
+                alt={currentDetail.title}
+                className="schematic_detail_image"
+                style={{
+                  width: "100%",
+                  maxWidth: "600px",
+                  height: "auto",
+                  border: "1px solid var(--secondary-color)",
+                  borderRadius: "8px",
+                }}
+              />
+            </div>
+          </Col>
+        </Row>
+
+        {/* Detailed Description */}
+        <Row className="mb-5">
+          <Col lg="10">
+            <h3 className="color_sec py-4">Overview</h3>
+            <p className="schematic_detail_description">
+              {currentDetail.detailedDescription}
+            </p>
+          </Col>
+        </Row>
+
+        {/* Design Notes */}
+        <Row className="mb-5">
+          <Col lg="10">
+            <h3 className="color_sec py-4">Notes</h3>
+            <ul className="design_notes_list">
+              {currentDetail.designNotes.map((note, i) => (
+                <li key={i}>{note}</li>
+              ))}
+            </ul>
+          </Col>
+        </Row>
+
+        {/* Subsystems Gallery - if this is a top-level schematic with subsystems */}
+        {currentDetail.subsystems && currentDetail.subsystems.length > 0 && !subsystemId && (
+          <>
+            <Row className="mb-5">
+              <Col lg="12">
+                <div className="schematics_gallery">
+                  {currentDetail.subsystems.map((subsystem, i) => (
+                    <div
+                      key={i}
+                      className="schematic_card"
+                      onClick={() =>
+                        navigate(
+                          `/project/vacqlock/schematic/${schematic.id}/subsystem/${subsystem.id}`,
+                          {
+                            state: { schematic, projectPath },
+                          }
+                        )
+                      }
+                      style={{ cursor: "pointer" }}
+                    >
+                      <div className="schematic_img_wrapper">
+                        <img
+                          src={subsystem.img}
+                          alt={subsystem.title}
+                          className="schematic_placeholder"
+                        />
+                        <div className="schematic_overlay">
+                          <h5>{subsystem.title}</h5>
+                          <p>{subsystem.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Col>
+            </Row>
+          </>
+        )}
+      </Container>
+    </HelmetProvider>
+  );
+};

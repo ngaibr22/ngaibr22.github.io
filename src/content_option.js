@@ -1,144 +1,88 @@
-const logotext = "JOHN";
+import VacQLockImage from "./assets/images/VacQLockImage.jpg";
+import FR3YAImage from "./assets/images/FR3YA.png";
+import LOKIImage from "./assets/images/LOKI.png";
+import MEImage from "./assets/images/Brenden_Jojo.png";
+
+const logotext = "Brenden";
 const meta = {
-    title: "John Doe",
-    description: "I’m John Doe data scientist _ Full stack devloper,currently working in Berlin",
+    title: "Brenden Ngai",
+    description: "I'm Brenden A. Ngai, an aspiring Electrical Engineer with a passion for semiconductor technology and a strong foundation in hardware design.",
 };
 
 const introdata = {
-    title: "I’m John Doe",
+    title: "I’m Brenden Ngai",
     animated: {
-        first: "I love coding",
-        second: "I code cool websites",
-        third: "I develop mobile apps",
+        first: "Aspiring Electrical Engineer",
+        second: "Silicon Enthusiast",
+        third: "Good Things Come in Microelectronic Packages",
     },
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum",
-    your_img_url: "https://images.unsplash.com/photo-1514790193030-c89d266d5a9d",
+    description: "",
+    your_img_url: MEImage,
 };
 
 const dataabout = {
-    title: "abit about my self",
-    aboutme: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis dolor id ligula semper elementum feugiat pretium nulla. Nunc non commodo dolor. Nunc mollis dignissim facilisis. Morbi ut magna ultricies.",
+    title: "About Myself",
+    aboutme: ''
 };
-const worktimeline = [{
-        jobtitle: "Designer of week",
-        where: "YAdfi",
-        date: "2020",
+
+
+/*const worktimeline = [{
+        jobtitle: "Undergraduate Researcher",
+        where: "NYU Wireless",
+        date: "2026",
     },
     {
-        jobtitle: "Designer of week",
-        where: "Jamalya",
-        date: "2019",
+        jobtitle: "Electrical Engineer Intern",
+        where: "Turner Construction Company",
+        date: "2024",
     },
-    {
-        jobtitle: "Designer of week",
-        where: "ALquds",
-        date: "2019",
-    },
-];
+]; */
 
 const skills = [{
-        name: "Python",
-        value: 90,
-    },
-    {
-        name: "Djano",
-        value: 85,
-    },
-    {
-        name: "Javascript",
+        name: "Analog / Mixed Signal IC Design",
         value: 80,
     },
     {
-        name: "React",
+        name: "RFIC & High Frequency Circuit Design",
+        value: 80,
+    },
+    {
+        name: "Circuit Simulation & Design Tools",
+        value: 80,
+    },
+    {
+        name: "Python / Programming",
         value: 60,
     },
     {
-        name: "Jquery",
-        value: 85,
+        name: "Full Custom Layout & Physical Verification",
+        value: 70,
     },
 ];
 
-const services = [{
-        title: "UI & UX Design",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
-    },
-    {
-        title: "Mobile Apps",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
-    },
-    {
-        title: "Wordpress Design",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at nisl euismod urna bibendum sollicitudin.",
-    },
-];
+
 
 const dataportfolio = [{
-        img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
+        img: VacQLockImage,
+        description: "VacQLock: A 20-30 GHz Mixed-Signal Heterodyne Receiver RFIC",
+        link: "/project/vacqlock",
+    },
+    {
+        img: VacQLockImage,
+        description: "FR3YA: A 24 GHz Vector-Modulated Phase Shifter RFIC",
         link: "#",
     },
     {
-        img: "https://picsum.photos/400/800/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/600/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/300/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/700/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-
-    {
-        img: "https://picsum.photos/400/600/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/300/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/550/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
-        link: "#",
-    },
-    {
-        img: "https://picsum.photos/400/700/?grayscale",
-        description: "The wisdom of life consists in the elimination of non-essentials.",
+        img: VacQLockImage,
+        description: "LOKI: sub-THz 4-Port Orthognal Calibration Standard IC",
         link: "#",
     },
 ];
 
 const contactConfig = {
-    YOUR_EMAIL: "name@domain.com",
-    YOUR_FONE: "(555)123-4567",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vehicula eu nunc et sollicitudin. Cras pulvinar, nisi at imperdiet pharetra. ",
+    YOUR_EMAIL: "ngaibr22@gmail.com",
+    YOUR_FONE: "(917)-593-6885",
+    description: "",
     // creat an emailjs.com account 
     // check out this tutorial https://www.emailjs.com/docs/examples/reactjs/
     YOUR_SERVICE_ID: "service_id",
@@ -147,18 +91,16 @@ const contactConfig = {
 };
 
 const socialprofils = {
-    github: "https://github.com",
-    facebook: "https://facebook.com",
-    linkedin: "https://linkedin.com",
-    twitter: "https://twitter.com",
+    github: "https://github.com/ngaibr22",
+    linkedin: "https://www.linkedin.com/in/thengaiguy/",
 };
+
 export {
     meta,
     dataabout,
     dataportfolio,
-    worktimeline,
+    //worktimeline,
     skills,
-    services,
     introdata,
     contactConfig,
     socialprofils,

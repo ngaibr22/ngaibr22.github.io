@@ -2,6 +2,7 @@
     "name": "react-portfolio",
     "version": "0.1.0",
     "private": true,
+    "homepage": "https://ngaibr22.github.io",
     "dependencies": {
         "bootstrap": "^5.2.3",
         "emailjs-com": "^3.2.0",
@@ -21,8 +22,11 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "predeploy": "yarn build && cp build/index.html build/404.html",
+        "predeploy": "yarn build && node -e \"require('fs').copyFileSync('build/index.html', 'build/404.html')\"",
         "deploy": "gh-pages -d build"
+    },
+    "devDependencies": {
+        "gh-pages": "^6.3.0"
     },
     "eslintConfig": {
         "extends": [

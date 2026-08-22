@@ -1,0 +1,259 @@
+/* VacQLock Project Page Styles */
+
+/* Block Diagram Container */
+.block_diagram_container {
+  background: var(--secondary-color);
+  border: 1px solid var(--text-color);
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem 0;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.block_diagram_svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.diagram_text {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  fill: var(--text-color);
+}
+
+/* System Architecture Styles */
+.sys_description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border-left: 4px solid var(--primary-color);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.system_specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.spec_item {
+  padding: 1.5rem;
+  background: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.spec_item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-color: var(--text-color);
+}
+
+.spec_item h5 {
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.spec_item p {
+  color: var(--primary-color);
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Schematics Gallery */
+.schematics_gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.schematic_card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  transition: 0.3s ease;
+  min-height: 280px;
+}
+
+.schematic_card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-color: var(--primary-color);
+}
+
+.schematic_img_wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.schematic_placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.schematic_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.schematic_card:hover .schematic_overlay {
+  opacity: 1;
+}
+
+.schematic_overlay h5 {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.schematic_overlay p {
+  color: var(--text-color);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Performance Highlights */
+.performance_list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.performance_list li {
+  padding: 0.75rem 0;
+  padding-left: 1.75rem;
+  position: relative;
+  color: var(--text-color);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.performance_list li:before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+/* Color Sec (consistent with site theme) */
+.color_sec {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-left: 4px solid var(--primary-color);
+  padding-left: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .block_diagram_container {
+    padding: 1rem;
+    min-height: 250px;
+  }
+
+  .diagram_text {
+    font-size: 12px;
+  }
+
+  .system_specs {
+    grid-template-columns: 1fr;
+  }
+
+  .schematics_gallery {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .schematic_card {
+    min-height: 250px;
+  }
+
+  .sys_description {
+    font-size: 1rem;
+  }
+
+  .spec_item {
+    padding: 1rem;
+  }
+
+  .spec_item h5 {
+    font-size: 1rem;
+  }
+
+  .performance_list li {
+    font-size: 0.95rem;
+    padding-left: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .block_diagram_container {
+    padding: 0.75rem;
+  }
+
+  .color_sec {
+    font-size: 1.25rem;
+  }
+
+  .schematics_gallery {
+    gap: 1rem;
+  }
+
+  .schematic_overlay h5 {
+    font-size: 1rem;
+  }
+
+  .schematic_overlay p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .block_diagram_container {
+    page-break-inside: avoid;
+  }
+
+  .schematics_gallery {
+    page-break-inside: avoid;
+  }
+
+  .schematic_overlay {
+    opacity: 1 !important;
+  }
+}

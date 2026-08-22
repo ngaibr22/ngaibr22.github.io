@@ -31,28 +31,34 @@ export const About = () => {
           </Col>
           <Col lg="7" className="d-flex align-items-center">
             <div>
-              <p>{dataabout.aboutme}</p>
+              <p>{dataabout.aboutme}
+                <p>
+                I'm an Electrical Engineer with a focus on Analog and Mixed-Signal IC Design. My interest in silicon, and engineering in general comes from a simple question that has followed me for as long as I can remember:
+                
+                <strong> how does this actually work?</strong>
+                </p>
+
+                <p>
+                  I've always been fascinated by electronics. Not simply by what they can do, but the layers of engineering that make them possible. That curiosity eventually led me from taking apart the technology around me to designing circuits of my own, and ultimately into the small but complex world of integrated circuits that power the world today.
+                </p>
+
+                <p>
+                  As of now, my experience is primarily in transistor-level circuit design, RFICs, Analog and Mixed-Signal systems, custom IC layout, simulation, and physical verification. I've worked on projects ranging from individual circuit blocks to complete mixed-signal systems and fabricated silicon.
+                </p>
+
+                <p>
+                  However, what I enjoy most is learning something I don't know yet and figuring it out. I'm most comfortable when I'm uncomfortable, and I believe some of the most valuable engineering knowledge comes from being willing to struggle with a problem rather than immediately looking for the easy answer. As such, much of my engineering experience has been driven by self-directed experimentation: teaching myself new tools, exploring unfamiliar concepts, breaking things, and trying again.
+                </p>
+
+                <p>
+                  In fact, this website iself is a product of that curiosity. I built it from scratch to learn more about web development, and to create a space where I can share my work and ideas with the world.
+                </p>
+
+                <p>
+                  <strong>Ultimately, I'm curious. I'm hungry for more knowledge, and I'm excited to continue learning and growing as an engineer. That's who I am, and that's what I do.</strong>
+                </p>
+              </p>
             </div>
-          </Col>
-        </Row>
-        <Row className=" sec_sp">
-          <Col lg="5">
-            <h3 className="color_sec py-4">Work Timline</h3>
-          </Col>
-          <Col lg="7">
-            <table className="table caption-top">
-              <tbody>
-                {worktimeline.map((data, i) => {
-                  return (
-                    <tr key={i}>
-                      <th scope="row">{data.jobtitle}</th>
-                      <td>{data.where}</td>
-                      <td>{data.date}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
           </Col>
         </Row>
         <Row className="sec_sp">
@@ -74,21 +80,6 @@ export const About = () => {
                       <div className="progress-value">{data.value}%</div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </Col>
-        </Row>
-        <Row className="sec_sp">
-          <Col lang="5">
-            <h3 className="color_sec py-4">services</h3>
-          </Col>
-          <Col lg="7">
-            {services.map((data, i) => {
-              return (
-                <div className="service_ py-4" key={i}>
-                  <h5 className="service__title">{data.title}</h5>
-                  <p className="service_desc">{data.description}</p>
                 </div>
               );
             })}
