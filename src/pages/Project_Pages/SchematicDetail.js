@@ -3,12 +3,32 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Container, Row, Col } from "react-bootstrap";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { meta } from "../../content_option";
+import { schematics } from "./VacQLock/vacqlockSchematics";
+
+const renderDescription = (description) => {
+  if (typeof description !== "string") {
+    return description;
+  }
+
+  return description.split(/\n\s*\n/).map((paragraph, paragraphIndex) => (
+    <p key={paragraphIndex}>
+      {paragraph.split(/(\*\*[^*]+\*\*)/).map((part, partIndex) =>
+        part.startsWith("**") && part.endsWith("**") ? (
+          <strong key={partIndex}>{part.slice(2, -2)}</strong>
+        ) : (
+          part
+        )
+      )}
+    </p>
+  ));
+};
 
 export const SchematicDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { subsystemId } = useParams();
-  const { schematic, projectPath } = location.state || {};
+  const { id, subsystemId } = useParams();
+  const projectPath = location.state?.projectPath;
+  const schematic = schematics.find((item) => item.id === id);
 
   let currentDetail = schematic;
 
@@ -96,16 +116,16 @@ export const SchematicDetail = () => {
         <Row className="mb-5">
           <Col lg="10">
             <h3 className="color_sec py-4">Overview</h3>
-            <p className="schematic_detail_description">
-              {currentDetail.detailedDescription}
-            </p>
+            <div className="schematic_detail_description">
+              {renderDescription(currentDetail.detailedDescription)}
+            </div>
           </Col>
         </Row>
 
         {/* Design Notes */}
         <Row className="mb-5">
           <Col lg="10">
-            <h3 className="color_sec py-4">Notes</h3>
+            <h3 className="color_sec py-4">Design Notes</h3>
             <ul className="design_notes_list">
               {currentDetail.designNotes.map((note, i) => (
                 <li key={i}>{note}</li>
@@ -128,7 +148,7 @@ export const SchematicDetail = () => {
                         navigate(
                           `/project/vacqlock/schematic/${schematic.id}/subsystem/${subsystem.id}`,
                           {
-                            state: { schematic, projectPath },
+                            state: { projectPath },
                           }
                         )
                       }
@@ -140,9 +160,9 @@ export const SchematicDetail = () => {
                           alt={subsystem.title}
                           className="schematic_placeholder"
                         />
+                        <h5 className="schematic_title">{subsystem.title}</h5>
                         <div className="schematic_overlay">
-                          <h5>{subsystem.title}</h5>
-                          <p>{subsystem.description}</p>
+                          <p className="schematic_description">{subsystem.description}</p>
                         </div>
                       </div>
                     </div>

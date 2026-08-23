@@ -51,7 +51,7 @@ export const About = () => {
                 </p>
 
                 <p>
-                  In fact, this website iself is a product of that curiosity. I built it from scratch to learn more about web development, and to create a space where I can share my work and ideas with the world.
+                  In fact, this website itself is a product of that curiosity. I built it from scratch to learn more about web development, and to create a space where I can share my work and ideas with the world.
                 </p>
 
                 <p>
