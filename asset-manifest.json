@@ -1,19 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.890c1b4c.css",
-    "main.js": "/static/js/main.b922ee63.js",
+    "main.css": "/static/css/main.1998dd77.css",
+    "main.js": "/static/js/main.6689b12c.js",
     "static/media/Brenden_Jojo.png": "/static/media/Brenden_Jojo.cb1c884d89cb979217e8.png",
-    "static/media/PLL_FLL_Waveform.jpg": "/static/media/PLL_FLL_Waveform.87b765b5936d364a38ab.jpg",
     "static/media/S21_Balun.png": "/static/media/S21_Balun.99e47d7c76c35cb1744f.png",
-    "static/media/LOKI.png": "/static/media/LOKI.3b1ddb6340c8e16ce812.png",
+    "static/media/ADC_Performance_2.png": "/static/media/ADC_Performance_2.7dc58403a84a033d3b2f.png",
     "static/media/19_29_GHz_VCO_Schematic.jpg": "/static/media/19_29_GHz_VCO_Schematic.4318709f69e9a2d49287.jpg",
-    "static/media/FR3YA.png": "/static/media/FR3YA.0ed494ca31983b6c9dad.png",
     "static/media/VacQLock_Block_Diagram.jpg": "/static/media/VacQLock_Block_Diagram.7ecad0cdd5feb0d3e2d0.jpg",
     "static/media/LNA+Balun.jpg": "/static/media/LNA+Balun.9bd580227ba9a2888bb7.jpg",
     "static/media/GM-C Bandpass (1).jpg": "/static/media/GM-C Bandpass (1).f02af097743e1653c59e.jpg",
     "static/media/Costas PLL_FLL.jpg": "/static/media/Costas PLL_FLL.d4c13b70b9f0a38393f1.jpg",
     "static/media/5GHz_LC_VCO.jpg": "/static/media/5GHz_LC_VCO.e56f31b8da72d301cc7d.jpg",
-    "static/media/Ring VCO Schematic.jpg": "/static/media/Ring VCO Schematic.c97503562b3aaeb8f44f.jpg",
+    "static/media/StrongARM (2).jpg": "/static/media/StrongARM (2).955d90970746299746d8.jpg",
     "static/media/VacQLockImage.jpg": "/static/media/VacQLockImage.f890ee0cc2f7e47f7d20.jpg",
     "static/media/Inverter_Source_Follower_Schematic.jpg": "/static/media/Inverter_Source_Follower_Schematic.4a3d9a32a802379cfbc4.jpg",
     "static/media/Multiplier.jpg": "/static/media/Multiplier.d5f69690df63b155794d.jpg",
@@ -21,13 +19,11 @@
     "static/media/OTA_Schematic.jpg": "/static/media/OTA_Schematic.2062b107967bef807b90.jpg",
     "static/media/Mixer.jpg": "/static/media/Mixer.019bca6c7da388fc8dd6.jpg",
     "static/media/Wideband_VCO.jpg": "/static/media/Wideband_VCO.65bbb80ee566a3e4ab7c.jpg",
-    "static/media/Differentiator Schematic.jpg": "/static/media/Differentiator Schematic.657b9c3db45d25ccdd2f.jpg",
-    "static/media/Ring_Amp.jpg": "/static/media/Ring_Amp.b4b90edb34ec5815f1d3.jpg",
-    "static/media/Signum Schematic.jpg": "/static/media/Signum Schematic.c9073ac2bde8ab1f2ac7.jpg",
+    "static/media/9-Level Flash ADC.jpg": "/static/media/9-Level Flash ADC.b627d6da5fd604fd95aa.jpg",
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.890c1b4c.css",
-    "static/js/main.b922ee63.js"
+    "static/css/main.1998dd77.css",
+    "static/js/main.6689b12c.js"
   ]
 }
