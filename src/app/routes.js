@@ -29,6 +29,7 @@ const AnimatedRoutes = withRouter(({ location }) => (
         <Route path="/project/vacqlock" element={<VacQLock />} />
         <Route path="/project/vacqlock/schematic/:id" element={<SchematicDetail />} />
         <Route path="/project/vacqlock/schematic/:id/subsystem/:subsystemId" element={<SchematicDetail />} />
+        <Route path="/project/vacqlock/schematic/:id/subsystem/:subsystemId/subsystem/:subsystemId2" element={<SchematicDetail />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </CSSTransition>

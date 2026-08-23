@@ -13,6 +13,9 @@ import Costas_Image from "../../../assets/images/Costas PLL_FLL.jpg";
 import VCO_Control_Logic_Section_Image from "../../../assets/images/9-Level Flash ADC.jpg";
 import VCO_Control_Logic_Image from "../../../assets/images/StrongARM (2).jpg";
 import ADC_Performance_Image from "../../../assets/images/ADC_Performance_2.png";
+import BandPass_Simulation_Image from "../../../assets/images/Bandpass_Simulation.png";
+import { BlockMath, InlineMath } from "react-katex";
+import "katex/dist/katex.min.css";
 
 export const schematics = [
   {
@@ -264,7 +267,7 @@ export const schematics = [
         detailedDescription: (
           <>
             <p>
-              The distinction between the Folded Gilbert Cell Mixer and Multiplier depends on the DC biasing of the PMOS quad. Should the quad inputs be biased such that V_oV = 0, then the topology functions as a commutating mixer. Should the quad be biased into saturation (V_oV >= 0), then the topology acts as a multiplier.
+              The distinction between the Folded Gilbert Cell Mixer and Multiplier depends on the DC biasing of the PMOS quad. Should the quad inputs be biased such that V_oV = 0, then the topology functions as a commutating mixer. Should the quad be biased into saturation (V_oV &gt;= 0), then the topology acts as a multiplier.
             </p>
           </>
         ),
@@ -308,39 +311,93 @@ export const schematics = [
         id: "Bandpass_Filter",
         img: Bandpass_Image,
         title: "1 GHz Bandpass Filter",
-        description: "1 GHz Bandpass Filtert Schematic",
-        detailedDescription: "The 1 GHz bandpass filter is implemented through a 6th-Order Butterworth GM-C Filter. This system topology uses Gm-C cells in the Gyrator topology, thus emulating the transfer function of a shunt inductor. This allows the system to have the sharp frequency response of a LC-based butterworth filter, without the use of large and unreliable On-Chip inductors.",
-        designNotes: [
-          "A total of 14 Gm cells are used. Each Gm cell draws about 950uA of current, equating to a total current draw below 14mA",
-          "Passband is designed to have a bandwidth of 400 MHz centered about 1 GHz",
-          "Filter has linear range of 40mV centered about 600mV",
-          "Gm cells have independent CMFB to enforce 600mV DC operating point",
+        description: "IF Stage Filter",
+        detailedDescription: (
+          <>
+            <p>
+              The IF stage bandpass filter is implemented through a 6th-Order Butterworth Gm-C filter. This system topology utilizes Gm-C cells in the gyrator configuration that emulates the transfer function of a shunt inductor. This allows the system to have the sharp frequency selectivity of a traditional LC-based butterworth filter, without the use of large and potentially unreliable On-Chip inductors
+            </p>
+          </>
+        ),
+        designNotes: [ (
+            <>
+              <li>A total of 14 Gm cells are used. Each Gm cell draws about 950uA of static current, equating to a total static current draw below 14mA</li>
+              <li>Passband is designed to have a bandwidth of 400 MHz centered about 1 GHz</li>
+              <li>Gm cells have independent CMFB to enforce 600mV DC operating point</li>
+              <li>Filter has linear range of 80mV centered about 600mV</li>
+            </>
+          )
+        ],
+        subsystems: [
+          {
+            id: "Bandpass_Simulation",
+            img: BandPass_Simulation_Image,
+            title: "Bandpass Filter Simulation",
+            description: "Simulated frequency response of the 1 GHz bandpass filter",
+            detailedDescription: (
+              <>
+                <p>
+                  Simulation results for the 1 GHz bandpass filter, showing the desired 400 MHz passband centered about 1 GHz
+                </p>
+              </>
+            ),
+            designNotes: [ (
+              <>
+                <li>Frequency response shaped and verified using AC analysis</li>
+              </>
+              )
+            ],
+          },
         ],
       },
       {
         id: "LowPass_Filter",
         img: LowPass_Image,
         title: "Lowpass Filter",
-        description: "Lowpass Filter Schematic",
-        detailedDescription: "VacQLock is designed to operate on a channel bandwidth of 400 MHz, the largest available bandwidth on commercial 5G systems. Because the system features IQ demodulation and thus image rejection, the lowpass filter can be tuned around a 200 MHz bandwidth rather than a 400 MHz bandwidth. The Gm-C lowpass system implements a 8th-Order Biquad Filter consisting of two identical 4-th order Biquad Filters.",
-        designNotes: [
-          "A total of 8 Gm cells are used. Each Gm cell draws about 950uA of current, equating to a total current draw below 8mA",
-          "Identical 4th-Order Biquads are used to produce an 8th-Order Filter. 8 capacitors are individually tuned to shape frequency response",
-          "Filter has linear range of 40mV centered about 600mV",
-          "Two Lowpass Filters are used for In-Phase and Quadrature-Phase Demodulation",
+        description: "Lowpass Filter used in IQ demodulation",
+        detailedDescription: (
+          <>
+            <p>
+              VacQLock is designed to operate on a channel bandwidth of 400 MHz, the largest available bandwidth on current commercial 5G systems. Because the system features IQ demodulation and thus image rejection, the lowpass filter can be tuned around a 200 MHz bandwidth rather than the entire 400 MHz bandwidth.
+            </p>
+
+            <p>
+              The Gm-C Lowpass filter is implemented by a 8th-Order Biquad Filter consisting of two identical 4th order Biquad filters
+            </p>
+          </>
+        ),
+        designNotes: [ (
+            <>
+              <li>A total of 8 Gm cells are used. Each Gm cell draws about 950uA of static current, equating to a total static current draw below 8mA</li>
+              <li>Identical 4th-Order Biquads are used to produce an 8th-Order Filter. 8 capacitors are individually tuned to shape frequency response</li>
+              <li>Gm cells have independent CMFB to enforce 600mV DC operating point</li>
+              <li>Filter has linear range of 80mV centered about 600mV</li>
+            </>
+          )
         ],
       },
       {
         id: "Gm_Cell",
         img: OTA_Image,
         title: "Operational Transconductance Amplifier",
-        description: "Operational Transconductance Amplifier Schematic",
-        detailedDescription: "The Operational Transconductance Amplifier (OTA) is the fundamental building block of the VacQLock system. While OTAs can be implemented using various topologies, all OTAs work on the basis of converting an input voltage to an output current. For simplicity, the chosen topology to implement the OTA was a simple differential pair with reference-based Common-Mode Feedback",
-        designNotes: [
-          "The OTA cell is designed to draw around 950uA of current. While current consumption and power could theoretically be reduced, it was kept at 950uA in concerns with OTA bandwidth under PVT",
-          "Active PMOS loads are used to facilitate the use of CMFB",
-          "Common Mode sensing is performed using NMOS transistors with high input resistance",
-          "CMFB is designed to enforce the output voltage to be equal to the reference voltage: 600mV",
+        description: "Gm Cell used within VacQLock filters",
+        detailedDescription: (
+          <>
+            <p>
+              The Operational Transconductance Amplifier (OTA) is the fundamental building block for the VacQLock filters. While OTAs can be implemented using various topologies as all OTAs work on the basis of converting an input voltage to output current. For simplicity, the topology chosen for the OTA was a simple differential pair with reference-based Common-Mode Feedback
+            </p>
+          </>
+        ),
+        designNotes: [ (
+            <>
+              <li>
+                The OTA cell is designed to draw around 950uA of static current. While current consumption and power could theoretically be reduced, it was kept at 950uA in concerns with OTA bandwidth under PVT.
+              </li>
+              <li>Active PMOS loads are used to facilitate Common-Mode Feedback</li>
+              <li>Common Mode sensing is performed using NMOS transistors with high input resistance</li>
+              <li>CMFB is designed to enforce the output voltage to be equal to the reference voltage: 600mV</  li>
+            </>
+          )
         ],
       },
     ],
@@ -350,13 +407,95 @@ export const schematics = [
     img: Costas_Image,
     title: "PLL & FLL",
     description: "Costas-based Phase and Frequency Locked Loop",
-    detailedDescription: "The Costas-based PLL and FLL is the most crucial aspect of the VacQLock system that ensures reliable downconversion. Due to the 19-29 GHz susceptibility to phase noise and frequency drift, 1 GHz IF is not guarenteed. When mixed with a 1 GHz Local Oscillator, the resulting baseband output will have some frequency offset. Therefore, the Costas-based PLL and FLL system is designed to compensate for total system frequency drift and phase noise through a large 100 MHz capture range, and 5uS lock time. This guarentees true baseband downconversion based on the current intermediate frequency.",
-    designNotes: [
-      "Bandgap reference for voltage generation",
-      "Current mirror bias network for low temperature drift",
-      "On-chip regulation for supply noise rejection",
-      "Multiple bias points with independent tuning",
-      "Process-compensated design for robust PVT performance",
+    detailedDescription: (
+      <>
+        <p>
+          The Costas-based FLL/PLL is arguably the most important system of VacQLock for it provides carrier recovery and compensates for frequency error and phase drift introduced by the 19-29 GHz RF VCO and subsequent heterodyne signal chain. Because the 19-29 GHz cannot guarentee an exact frequency, the resulting IF may deviate from the nominal 1 GHz target:
+        </p>
+
+        <BlockMath math="f_{IF} = f_{RF} - f_{LO1}" />
+
+        <p>
+          Any deviation in the 19-29 GHz VCO therefore produces a corresponding IF error:
+        </p>
+
+        <BlockMath math="\delta f = f_{IF} - 1\,\mathrm{GHz}" />
+
+        <p>
+          As a system targeting 5G communication and beyond, VacQLock must operate on complex-valued signals containing both in-phase and quadrature components. This creates ambiguity for conventional PLL phase detectors: at certain phase relationships, the detector output can approach zero even when the carrier is not correctly aligned. A conventional charge-pump PLL can therefore lose a reliable error signal and potentially lose lock.
+        </p>
+
+        <p>
+          Therefore VacQLock employs the use of Costas-based architecture, with the combination of a Frequency-Locked Loop (FLL) for coarse frequency correction and a Phase-Locked Loop (PLL) for fine phase tracking.
+        </p>
+
+        <p>
+          The Costas detector first generates in-phase and quadrature components,
+          <InlineMath math="I(t)" /> and <InlineMath math="Q(t)" />, from the incoming IF signal:
+        </p>
+
+        <BlockMath math="I(t) = A\cos(\phi_e), \qquad Q(t) = A\sin(\phi_e)" />
+
+        <p>
+          VacQLock uses analog multipliers to form the I/Q products required for carrier-error
+          detection. The PLL error is derived from the multiplication between I and Q components:
+        </p>
+
+        <BlockMath math="e_{PLL} \propto I(t)Q(t)" />
+
+        <p>
+          The FLL extends this concept by using the time-varying behavior of the I/Q signals.
+          Its frequency-error detector is proportional to the cross-product of the I/Q signals
+          and their derivatives:
+        </p>
+
+        <BlockMath math="e_{FLL} \propto I'(t)Q(t) - I(t)Q'(t)" />
+
+        <p>
+          As the derivative of phase corresponds to instantaneous frequency,
+        </p>
+
+        <BlockMath math="\Delta\omega_e = \frac{d\phi_e}{dt}" />
+
+        <p>
+          This allows the two feedback paths to perform complementary stages of carrier recovery: the FLL establishes coarse frequency alignment while the PLL refines the remaining phase error.
+        </p>
+
+        <p>
+          The error signals are generated entirely in the analog domain. I/Q products are produced
+          using analog multipliers, followed by differential amplification. Differential-to-single-
+          ended current subtractors then combine the amplified differential signals to produce the
+          corresponding FLL and PLL error currents.
+        </p>
+
+        <p>
+          A key feature of this architecture is the weighting of the FLL and PLL error paths. The FLL error current is first passed through a 10 MHz bandwidth loop filter, establishing a tuning bias for the VCO. The filtered FLL correction is then combined with raw PLL error currents:
+        </p>
+
+        <BlockMath math="I_{CTRL} = I_{FLL,\ filtered} + I_{PLL}" />
+
+        <p>
+          The combined current is then passed through a final 5 Mhz bandwidth loop filter before driving the ring VCO. This allows the FLL to establish coarse operating frequency before the PLL begins making fine phase corrections.
+        </p>
+
+        <BlockMath math="\text{FLL Acquisition} \rightarrow \text{Coarse Frequency Lock} \rightarrow \text{PLL Phase Lock}" />
+
+
+        <p>
+          The combined Costas PLL/FLL provides approximately 200 MHz of frequency capture range with a target lock time of approximately 5 µs. By closing the feedback loop around the actual receiver output, the architecture actively compensates for frequency drift and phase noise from the wideband 20–30 GHz VCO, rather than relying on an idealized oscillator frequency. This enables reliable baseband downconversion across the full 20–30 GHz operating range.
+        </p>
+      </>
+    ),
+    designNotes: [ (
+      <>
+        <li><strong>200 MHz Capture range, centered about 1 GHz</strong></li>
+        <li><strong>5uS lock time</strong></li>
+        <li>Costas PLL + FLL can handle both sudden and gradual frequency changes</li>
+      </>
+      )
     ],
+    subsystems: [
+
+    ]
   },
 ];

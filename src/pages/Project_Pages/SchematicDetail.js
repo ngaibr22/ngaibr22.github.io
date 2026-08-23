@@ -26,15 +26,19 @@ const renderDescription = (description) => {
 export const SchematicDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { id, subsystemId } = useParams();
+  const { id, subsystemId, subsystemId2 } = useParams();
   const projectPath = location.state?.projectPath;
   const schematic = schematics.find((item) => item.id === id);
 
   let currentDetail = schematic;
 
-  // If subsystemId is provided, find the subsystem within the schematic
+  // Resolve each requested level while keeping leaf systems unchanged.
   if (subsystemId && schematic?.subsystems) {
     currentDetail = schematic.subsystems.find((sub) => sub.id === subsystemId);
+  }
+
+  if (subsystemId2 && currentDetail?.subsystems) {
+    currentDetail = currentDetail.subsystems.find((sub) => sub.id === subsystemId2);
   }
 
   if (!currentDetail) {
@@ -134,8 +138,8 @@ export const SchematicDetail = () => {
           </Col>
         </Row>
 
-        {/* Subsystems Gallery - if this is a top-level schematic with subsystems */}
-        {currentDetail.subsystems && currentDetail.subsystems.length > 0 && !subsystemId && (
+        {/* Render a gallery only for items that actually have child systems. */}
+        {currentDetail.subsystems && currentDetail.subsystems.length > 0 && (
           <>
             <Row className="mb-5">
               <Col lg="12">
@@ -146,7 +150,9 @@ export const SchematicDetail = () => {
                       className="schematic_card"
                       onClick={() =>
                         navigate(
-                          `/project/vacqlock/schematic/${schematic.id}/subsystem/${subsystem.id}`,
+                          subsystemId
+                            ? `/project/vacqlock/schematic/${schematic.id}/subsystem/${subsystemId}/subsystem/${subsystem.id}`
+                            : `/project/vacqlock/schematic/${schematic.id}/subsystem/${subsystem.id}`,
                           {
                             state: { projectPath },
                           }
