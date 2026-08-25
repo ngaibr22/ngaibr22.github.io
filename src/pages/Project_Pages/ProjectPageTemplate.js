@@ -3,6 +3,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { meta } from "../../content_option";
+import "./VacQLock/style.css";
 
 /**
  * Reusable Project Page Template

@@ -1,6 +1,6 @@
 import VacQLockImage from "./assets/images/VacQLockImage.jpg";
-//import FR3YAImage from "./assets/images/FR3YA.png";
-//import LOKIImage from "./assets/images/LOKI.png";
+import FR3YACadenceImage from "./assets/images/FR3YA_Cadence.png";
+import LOKICadenceImage from "./assets/images/LOKI_Cadence.png";
 import MEImage from "./assets/images/Me.jpeg";
 
 const logotext = "Brenden";
@@ -68,14 +68,14 @@ const dataportfolio = [{
         link: "/project/vacqlock",
     },
     {
-        img: VacQLockImage,
-        description: "FR3YA: A 24 GHz Vector-Modulated Phase Shifter RFIC",
-        link: "#",
+        img: FR3YACadenceImage,
+        description: "FR3YA: 24 GHz Vector-Modulated Phase Shifter RFIC",
+        link: "/project/fr3ya",
     },
     {
-        img: VacQLockImage,
-        description: "LOKI: sub-THz 4-Port Orthognal Calibration Standard IC",
-        link: "#",
+        img: LOKICadenceImage,
+        description: "LOKI: 4-Port Orthognal Calibration Standard IC",
+        link: "/project/loki",
     },
 ];
 
@@ -83,11 +83,6 @@ const contactConfig = {
     YOUR_EMAIL: "ngaibr22@gmail.com",
     YOUR_FONE: "(917)-593-6885",
     description: "",
-    // creat an emailjs.com account 
-    // check out this tutorial https://www.emailjs.com/docs/examples/reactjs/
-    YOUR_SERVICE_ID: "service_id",
-    YOUR_TEMPLATE_ID: "template_id",
-    YOUR_USER_ID: "user_id",
 };
 
 const socialprofils = {

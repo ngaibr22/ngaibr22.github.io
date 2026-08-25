@@ -2,8 +2,8 @@ import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Container, Row, Col } from "react-bootstrap";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { meta } from "../../content_option";
-import { schematics } from "./VacQLock/vacqlockSchematics";
+import { meta } from "../../../content_option";
+import { schematics } from "./vacqlockSchematics";
 
 const renderDescription = (description) => {
   if (typeof description !== "string") {
@@ -149,18 +149,24 @@ export const SchematicDetail = () => {
                   {currentDetail.subsystems.map((subsystem, i) => (
                     <div
                       key={i}
-                      className="schematic_card"
-                      onClick={() =>
-                        navigate(
-                          subsystemId
-                            ? `/project/vacqlock/schematic/${schematic.id}/subsystem/${subsystemId}/subsystem/${subsystem.id}`
-                            : `/project/vacqlock/schematic/${schematic.id}/subsystem/${subsystem.id}`,
-                          {
-                            state: { projectPath },
-                          }
-                        )
+                      className={`schematic_card ${
+                        subsystem.detailedDescription || subsystem.designNotes?.length
+                          ? "is_clickable"
+                          : ""
+                      }`}
+                      onClick={
+                        subsystem.detailedDescription || subsystem.designNotes?.length
+                          ? () =>
+                              navigate(
+                                subsystemId
+                                  ? `/project/vacqlock/schematic/${schematic.id}/subsystem/${subsystemId}/subsystem/${subsystem.id}`
+                                  : `/project/vacqlock/schematic/${schematic.id}/subsystem/${subsystem.id}`,
+                                {
+                                  state: { projectPath },
+                                }
+                              )
+                          : undefined
                       }
-                      style={{ cursor: "pointer" }}
                     >
                       <div className="schematic_img_wrapper">
                         <img
@@ -169,9 +175,13 @@ export const SchematicDetail = () => {
                           className="schematic_placeholder"
                         />
                         <h5 className="schematic_title">{subsystem.title}</h5>
-                        <div className="schematic_overlay">
-                          <p className="schematic_description">{subsystem.description}</p>
-                        </div>
+                        {subsystem.description && (
+                          <div className="schematic_overlay">
+                            <p className="schematic_description">
+                              {subsystem.description}
+                            </p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}

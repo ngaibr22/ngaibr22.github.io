@@ -1,0 +1,168 @@
+.project-page {
+  color: var(--text-color);
+}
+
+.project-header {
+  margin: 1rem 0 3rem;
+  padding-top: 1rem;
+}
+
+.back_button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.t_border {
+  border-color: var(--primary-color);
+}
+
+.project-section {
+  margin-bottom: 3rem;
+}
+
+.color_sec {
+  border-left: 4px solid var(--primary-color);
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0.75rem 0 0.75rem 1rem;
+}
+
+.block_diagram_container,
+.schematic_detail_image_container {
+  align-items: center;
+  background: var(--secondary-color);
+  border: 1px solid var(--text-color);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 2rem;
+}
+
+.block_diagram_image,
+.schematic_detail_image {
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.sys_description,
+.schematic_detail_description {
+  background: rgba(0, 0, 0, 0.05);
+  border-left: 4px solid var(--primary-color);
+  line-height: 1.8;
+  padding: 1rem;
+}
+
+.system_specs,
+.schematics_gallery {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.system_specs {
+  margin-top: 2rem;
+}
+
+.spec_item,
+.schematic_card {
+  background: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+}
+
+.spec_item {
+  padding: 1.5rem;
+}
+
+.spec_item h5 {
+  color: var(--primary-color);
+}
+
+.schematic_card {
+  justify-self: center;
+  overflow: hidden;
+}
+
+.schematic_card.is_clickable {
+  cursor: pointer;
+}
+
+.schematic_img_wrapper {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.schematic_placeholder {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.schematic_title {
+  background: var(--bg-color);
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  bottom: 1rem;
+  left: 1.5rem;
+  margin: 0;
+  padding: 1rem;
+  position: absolute;
+  right: 1.5rem;
+  text-align: center;
+  z-index: 2;
+}
+
+.schematic_overlay {
+  align-items: center;
+  background: var(--bg-color);
+  border: 1px solid var(--text-color);
+  border-radius: 8px;
+  display: flex;
+  inset: 0.75rem;
+  justify-content: center;
+  opacity: 0;
+  padding: 1.5rem;
+  position: absolute;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.schematic_card:hover .schematic_overlay,
+.schematic_card:focus .schematic_overlay {
+  opacity: 1;
+}
+
+.schematic_description {
+  color: var(--text-color);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.design_notes_list,
+.performance_list {
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .block_diagram_container,
+  .schematic_detail_image_container {
+    padding: 1rem;
+  }
+
+  .system_specs,
+  .schematics_gallery {
+    grid-template-columns: 1fr;
+  }
+}

@@ -179,11 +179,16 @@ export const VacQLock = () => {
               {schematics.map((schematic, i) => (
                 <div
                   key={i}
-                  className="schematic_card"
-                  onClick={() =>
-                    navigate(`/project/vacqlock/schematic/${schematic.id}`)
+                  className={`schematic_card ${
+                    schematic.detailedDescription || schematic.designNotes?.length
+                      ? "is_clickable"
+                      : ""
+                  }`}
+                  onClick={
+                    schematic.detailedDescription || schematic.designNotes?.length
+                      ? () => navigate(`/project/vacqlock/schematic/${schematic.id}`)
+                      : undefined
                   }
-                  style={{ cursor: "pointer" }}
                 >
                   <div className="schematic_img_wrapper">
                     <img
@@ -192,9 +197,13 @@ export const VacQLock = () => {
                       className="schematic_placeholder"
                     />
                     <h5 className="schematic_title">{schematic.title}</h5>
-                    <div className="schematic_overlay">
-                      <p className="schematic_description">{schematic.description}</p>
-                    </div>
+                    {schematic.description && (
+                      <div className="schematic_overlay">
+                        <p className="schematic_description">
+                          {schematic.description}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
