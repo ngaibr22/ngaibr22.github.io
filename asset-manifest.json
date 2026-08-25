@@ -1,20 +1,25 @@
 {
   "files": {
     "main.css": "/static/css/main.35f0349d.css",
-    "main.js": "/static/js/main.22fbbff1.js",
-    "static/media/Brenden_Jojo.png": "/static/media/Brenden_Jojo.cb1c884d89cb979217e8.png",
+    "main.js": "/static/js/main.5d636e84.js",
+    "static/media/PLL_FLL_Waveform.jpg": "/static/media/PLL_FLL_Waveform.87b765b5936d364a38ab.jpg",
+    "static/media/Me.jpeg": "/static/media/Me.cce71d3f622353cdd031.jpeg",
     "static/media/S21_Balun.png": "/static/media/S21_Balun.99e47d7c76c35cb1744f.png",
     "static/media/ADC_Performance_2.png": "/static/media/ADC_Performance_2.7dc58403a84a033d3b2f.png",
+    "static/media/Transient_Lock.png": "/static/media/Transient_Lock.1383b2e4e8a08e4bae73.png",
     "static/media/Bandpass_Simulation.png": "/static/media/Bandpass_Simulation.f5ff4cd2d799d2cb7534.png",
     "static/media/19_29_GHz_VCO_Schematic.jpg": "/static/media/19_29_GHz_VCO_Schematic.4318709f69e9a2d49287.jpg",
     "static/media/VacQLock_Block_Diagram.jpg": "/static/media/VacQLock_Block_Diagram.7ecad0cdd5feb0d3e2d0.jpg",
     "static/media/LNA+Balun.jpg": "/static/media/LNA+Balun.9bd580227ba9a2888bb7.jpg",
+    "static/media/Cleaned_IQ.png": "/static/media/Cleaned_IQ.9cfd0aef91a7d117a81c.png",
     "static/media/GM-C Bandpass (1).jpg": "/static/media/GM-C Bandpass (1).f02af097743e1653c59e.jpg",
     "static/media/Costas PLL_FLL.jpg": "/static/media/Costas PLL_FLL.d4c13b70b9f0a38393f1.jpg",
     "static/media/5GHz_LC_VCO.jpg": "/static/media/5GHz_LC_VCO.e56f31b8da72d301cc7d.jpg",
     "static/media/KaTeX_AMS-Regular.ttf": "/static/media/KaTeX_AMS-Regular.853be92419a6c3766b9a.ttf",
+    "static/media/Raw_IQ.png": "/static/media/Raw_IQ.cb491297120959866990.png",
     "static/media/KaTeX_Main-Regular.ttf": "/static/media/KaTeX_Main-Regular.9eba1d77abcf2aa6e94e.ttf",
     "static/media/KaTeX_Main-Bold.ttf": "/static/media/KaTeX_Main-Bold.8169508bf58f8bd92ad8.ttf",
+    "static/media/Ring_VCO.jpg": "/static/media/Ring_VCO.c97503562b3aaeb8f44f.jpg",
     "static/media/StrongARM (2).jpg": "/static/media/StrongARM (2).955d90970746299746d8.jpg",
     "static/media/VacQLockImage.jpg": "/static/media/VacQLockImage.f890ee0cc2f7e47f7d20.jpg",
     "static/media/Inverter_Source_Follower_Schematic.jpg": "/static/media/Inverter_Source_Follower_Schematic.4a3d9a32a802379cfbc4.jpg",
@@ -42,6 +47,7 @@
     "static/media/KaTeX_Main-BoldItalic.woff": "/static/media/KaTeX_Main-BoldItalic.428978dc7837d46de091.woff",
     "static/media/KaTeX_Math-Italic.woff": "/static/media/KaTeX_Math-Italic.96759856b4e70f3a8338.woff",
     "static/media/KaTeX_Math-BoldItalic.woff": "/static/media/KaTeX_Math-BoldItalic.3f07ed67f06c720120ce.woff",
+    "static/media/ThreeMirror.jpg": "/static/media/ThreeMirror.029dd5a97a9b868d3acf.jpg",
     "static/media/KaTeX_Main-Italic.woff2": "/static/media/KaTeX_Main-Italic.fe2176f79edaa716e621.woff2",
     "static/media/KaTeX_Main-BoldItalic.woff2": "/static/media/KaTeX_Main-BoldItalic.20f389c4120be058d80a.woff2",
     "static/media/KaTeX_Script-Regular.ttf": "/static/media/KaTeX_Script-Regular.fc9ba5249878cd8f8d88.ttf",
@@ -51,9 +57,11 @@
     "static/media/KaTeX_Typewriter-Regular.woff": "/static/media/KaTeX_Typewriter-Regular.4c6b94fd1d07f8beff7c.woff",
     "static/media/KaTeX_SansSerif-Bold.woff": "/static/media/KaTeX_SansSerif-Bold.b9cd458ac6d5889ff9c3.woff",
     "static/media/KaTeX_SansSerif-Italic.woff": "/static/media/KaTeX_SansSerif-Italic.8d593cfaa96238d5e2f8.woff",
+    "static/media/Differentiator Schematic.jpg": "/static/media/Differentiator Schematic.657b9c3db45d25ccdd2f.jpg",
     "static/media/KaTeX_Typewriter-Regular.woff2": "/static/media/KaTeX_Typewriter-Regular.c295e7f71970f03c0549.woff2",
     "static/media/KaTeX_Fraktur-Bold.woff": "/static/media/KaTeX_Fraktur-Bold.354501bac435c3264834.woff",
     "static/media/KaTeX_Fraktur-Regular.woff": "/static/media/KaTeX_Fraktur-Regular.6fdf0ac577be0ba82a4c.woff",
+    "static/media/Ring_Amp.jpg": "/static/media/Ring_Amp.b4b90edb34ec5815f1d3.jpg",
     "static/media/KaTeX_Caligraphic-Bold.ttf": "/static/media/KaTeX_Caligraphic-Bold.7489a2fbfb9bfe704420.ttf",
     "static/media/KaTeX_Caligraphic-Regular.ttf": "/static/media/KaTeX_Caligraphic-Regular.7e873d3833eb108a0758.ttf",
     "static/media/KaTeX_SansSerif-Regular.woff": "/static/media/KaTeX_SansSerif-Regular.02271ec5cb9f5b4588ac.woff",
@@ -67,6 +75,7 @@
     "static/media/KaTeX_Script-Regular.woff": "/static/media/KaTeX_Script-Regular.073b3402d036714b4370.woff",
     "static/media/KaTeX_Size4-Regular.ttf": "/static/media/KaTeX_Size4-Regular.4ad7c7e8bb8d10a34bb7.ttf",
     "static/media/KaTeX_SansSerif-Regular.woff2": "/static/media/KaTeX_SansSerif-Regular.cd5e231e0cc53b2cb2c0.woff2",
+    "static/media/Signum Schematic.jpg": "/static/media/Signum Schematic.c9073ac2bde8ab1f2ac7.jpg",
     "static/media/KaTeX_Script-Regular.woff2": "/static/media/KaTeX_Script-Regular.c81d1b2a4b75d3eded60.woff2",
     "static/media/KaTeX_Caligraphic-Bold.woff": "/static/media/KaTeX_Caligraphic-Bold.d757c535a2e5902f1325.woff",
     "static/media/KaTeX_Caligraphic-Regular.woff": "/static/media/KaTeX_Caligraphic-Regular.db074fa22cf224af93d7.woff",
@@ -85,6 +94,6 @@
   },
   "entrypoints": [
     "static/css/main.35f0349d.css",
-    "static/js/main.22fbbff1.js"
+    "static/js/main.5d636e84.js"
   ]
 }
