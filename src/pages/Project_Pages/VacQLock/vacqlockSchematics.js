@@ -14,6 +14,18 @@ import VCO_Control_Logic_Section_Image from "../../../assets/images/9-Level Flas
 import VCO_Control_Logic_Image from "../../../assets/images/StrongARM (2).jpg";
 import ADC_Performance_Image from "../../../assets/images/ADC_Performance_2.png";
 import BandPass_Simulation_Image from "../../../assets/images/Bandpass_Simulation.png";
+import IQ_Demodulator_Cadence_Image from "../../../assets/images/IQ_Demodulator_Cadence.png";
+import Cleaned_IQ_Image from "../../../assets/images/Cleaned_IQ.png";
+import Transient_Image from "../../../assets/images/Transient_Lock.png";
+import PLL_FLL_Waveform_Image from "../../../assets/images/PLL_FLL_Waveform.jpg";
+import Raw_IQ_Image from "../../../assets/images/Raw_IQ.png";
+import Differentiator_Image from "../../../assets/images/Differentiator Schematic.jpg";
+import Signum_Image from "../../../assets/images/Signum Schematic.jpg";
+import Loop_Filter_Image from "../../../assets/images/Loop Filter.jpg";
+import Ring_VCO_Image from "../../../assets/images/Ring_VCO.jpg";
+import Ring_Amp_Image from "../../../assets/images/Ring_Amp.jpg";
+import Three_Current_Mirror_Image from "../../../assets/images/ThreeMirror.jpg";
+
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
@@ -161,12 +173,6 @@ export const schematics = [
               </p>
             </>
           ),
-        designNotes: [ (
-            <>
-              <li>-I cried when this worked</li>
-            </>
-          )
-        ],
       },
     ],
   },
@@ -488,14 +494,312 @@ export const schematics = [
     ),
     designNotes: [ (
       <>
-        <li><strong>200 MHz Capture range, centered about 1 GHz</strong></li>
-        <li><strong>5uS lock time</strong></li>
-        <li>Costas PLL + FLL can handle both sudden and gradual frequency changes</li>
+        <li>A FLL + PLL architecture was chosen due to the potentially large frequency uncertainty of the 19-29 GHz VCO.If the VCO had small frequency uncertainty, then only a PLL should be suitable for carrier recovery</li>
+        <li>FLL bandwidth is explicitly larger than the PLL bandwidth so frequency acquisition occurs before fine phase correction</li>
+        <li>The first iteration of the FLL/PLL used a conventional charge-pump feedback architecture. This approach ultimately proved unsuitable for VacQLock because the feedback signal contains QPSK information rather than a clean, deterministic carrier. The phase detector could therefore encounter ambiguous or degraded error information as the I/Q content changed, causing the loop to lose lock. This limitation motivated the transition to Costas-based architecture.</li>
       </>
       )
     ],
     subsystems: [
+      {
+        id: "PLL_FLL_Simulations",
+        img: PLL_FLL_Waveform_Image,
+        title: "PLL + FLL Simulations",
+        description: "Various Demonstrations of the FLL + PLL and IQ Demodulation",
+        detailedDescription: (
+          <>
+            <p>
+              This simulation alone, signified the completion of the VacQLock project. This transient simulation was performed connecting the entire VacQLock chain from start-to-finish. As expected, the 19-29 GHz VCO has frequency drift, however, the FLL+PLL system is able to detect this shift and change the IF phase and frequency until the system "locks". A system lock is shown when the feedback FLL+PLL waveform stops rising and plateaus at a lock level.
+            </p>
+          </>
+        ),
+        designNotes: [ (
+            <>
+              <li>
+                The FLL acquires lock around 5µs. The PLL acquires phase lock around 5.6us.
+              </li>
+              <li>Feedback bias sits at midrail (510mV)</li>
+            </>
+          )
+        ],
+        subsystems: [
+          {
+            id: "Transient_Lock",
+            img: Transient_Image,
+            title: "Signal Lock (Time-Domain)",
+            description: "In-Phase signal undergoing phase correction",
+            detailedDescription: (
+              <>
+                <p>
+                    This simulation shows the demodulated In-Phase signal using an ideal periodic IF source offset 5 MHz above the nominal 1 GHz frequency (1.005 GHz). The purpose of this simulation is to demonstrate the PLL’s fine-phase correction once the FLL has brought the VCO close to the target frequency.
+                </p>
+
+                <p>
+                  When the FLL is still far from lock, the In-Phase signal exhibits significant amplitude oscillations due to the frequency difference between the IF source and the VCO. As the FLL approaches the target frequency, these oscillations disappear, but the signal amplitude continues to vary due to the remaining phase error. The PLL then performs fine phase correction, progressively reducing the amplitude variation until the In-Phase signal reaches a stable, constant amplitude, indicating that both frequency and phase have been locked.
+                </p>
+              </>
+            ),
+
+          },
+          {
+            id: "Raw_IQ",
+            img: Raw_IQ_Image,
+            title: "Raw_IQ Demodulation",
+            description: "Raw IQ Demodulation without post-processing",
+            detailedDescription: (
+              <>
+                <p>
+                    This simulation shows the demodulated In-Phase (Green) and Quadrature-Phase (Magenta) waveforms after passing through the complete VacQLock receiver chain. Because VacQLock performs carrier recovery entirely in the analog domain, some In-Phase energy inevitably appears on the Quadrature-Phase channel and vice versa. However, after post-processing and appropriate thresholding, the In-Phase and Quadrature-Phase waveforms recover completely independent symbol streams. This demonstrates that VacQLock is capable of successfully performing complex demodulation despite the inherent channel coupling introduced by analog carrier recovery.
+                </p>
+
+              </>
+            ),
+
+          },
+          {
+            id: "Cleaned_IQ",
+            img: Cleaned_IQ_Image,
+            title: "Input IQ Signal",
+            description: "Input",
+            detailedDescription: (
+              <>
+                <p>
+                    This simulation shows the input In-Phase (Green) and Quadrature-Phase (Magenta) signal. Using Cadence Virtuoso's RFlib, a test IQ modulator is used to produce a 20-30 GHz signal at -80dBm. This signal is then fed into the receiver for testing purposes.
+                </p>
+
+              </>
+            ),
+
+          }
+
+        ]
+      },
+      {
+        id: "ThreeMirror",
+        img:  Three_Current_Mirror_Image,
+        title: "3-Current Mirror OTA",
+        description: "3-Current Mirror OTA used for various PLL+FLL applications",
+        detailedDescription: (
+          <>
+            <p>
+              The 3-current-mirror OTA provides the primary differential-to-single-ended conversion
+              within the Costas FLL/PLL. The topology was selected to establish a nominal
+              <strong> 500 mV mid-rail output</strong> for the subsequent loop-filter and varactor-control
+              stages. Complementary NMOS and PMOS current-mirror paths provide push-pull output control,
+              allowing positive and negative differential error signals to be represented symmetrically
+              around the mid-rail operating point.
+            </p>
+
+            <p>
+              Beyond differential-to-single-ended conversion, the topology also enables
+              <strong> current-mode summation and subtraction</strong> of the Costas error terms, making it
+              central to forming the FLL and PLL feedback signals:
+            </p>
+
+            <BlockMath math="e_{FLL} \propto I'(t)Q(t)-I(t)Q'(t)" />
+
+            <p>
+              This allows the differential error products to be converted, amplified, and combined directly
+              in the current domain before entering the loop-filter stages.
+            </p>
+          </>
+        )
+      },
+      {
+        id: "Signum",
+        img:  Signum_Image,
+        title: "Signum Amplifier",
+        description: "Signum Amplifier used for error term production",
+        detailedDescription: (
+          <>
+            <p>
+              Using the three-current-mirror OTA, it was found that a differential voltage could be
+              hard-limited by performing differential-to-single-ended conversion with opposing output
+              polarities and reconstructing the differential signal. Due to the voltage-to-current
+              behavior of the OTA and the attached load, sufficiently large differential inputs drive
+              the output into saturation, effectively producing a <strong> signum response</strong>:
+              the output is determined primarily by the polarity of the differential input rather than
+              its amplitude.
+            </p>
+
+            <p>
+              This behavior proved particularly useful for generating the Costas error terms. Instead
+              of directly multiplying the I/Q signals, the hard-limited signals can be used to form
+              amplitude-insensitive error terms:
+            </p>
+
+            <BlockMath math="e_{PLL} \propto \operatorname{sgn}(I(t))Q(t)-\operatorname{sgn}(Q(t))I(t)" />
+
+            <p>
+              Removing the amplitude dependence of one component prevents variations in the magnitude
+              of the received I/Q signal from disproportionately affecting the feedback loop. This is
+              particularly important for practical, non-periodic IQ signals, where amplitude
+              variations could otherwise cause the FLL/PLL to overreact and lose lock.
+            </p>
+
+            <p>
+              The resulting behavior makes the carrier-recovery loop more analogous to the
+              <strong> decision-based behavior of a charge-pump loop</strong>: the feedback responds
+              primarily when the relative polarity of the signals indicates that correction is
+              required, rather than continuously scaling the correction with signal amplitude.
+            </p>
+          </>
+        )
+      },
+      {
+        id: "Differentiator",
+        img:  Differentiator_Image,
+        title: "Differentiator",
+        description: "Differentiator used for error term production",
+        detailedDescription: (
+          <>
+            <p>
+              The FLL requires the time derivative of the I/Q signals to generate its frequency-error
+              term. A conventional analog differentiator would typically be implemented around a
+              dedicated operational amplifier; however, developing a full-scale op-amp was outside
+              the project's schedule and would have introduced unnecessary circuit complexity.
+            </p>
+
+            <p>
+              Instead, the existing <strong>3-current-mirror OTA</strong> was repurposed as the active
+              element of an analog differentiator. When configured with the appropriate resistive and
+              capacitive feedback network, the OTA reproduced the desired differentiating behavior,
+              albeit with the bandwidth and non-idealities of the underlying OTA.
+            </p>
+
+            <p>
+              AC analysis was used to characterize the differentiator and select the required
+              resistance and capacitance values. The network was specifically tuned to provide
+              differentiating behavior across the approximately <strong>200 MHz</strong> frequency
+              range relevant to the FLL feedback signal, rather than attempting to realize an ideal
+              derivative over an unlimited bandwidth.
+            </p>
+
+            <p>
+              The resulting band-limited OTA differentiator provides the derivative signals required
+              for frequency-error detection. Combined with the signum limiting stage, the FLL error
+              terms are formed as:
+            </p>
+
+            <BlockMath math="e_{FLL} \propto \operatorname{sgn}(I'(t))Q(t)-\operatorname{sgn}(Q'(t))I(t)" />
+
+            <p>
+              This approach allowed VacQLock to implement the required frequency-error detector while
+              reusing an existing OTA architecture, avoiding the additional design and verification
+              overhead of a dedicated high-bandwidth op-amp.
+            </p>
+          </>
+        ),
+        designNotes: [ (
+            <>
+              <li>Positive terminal is attached to a reference voltage of 600mV. This is analogous to attaching the positive terminal of an OP-AMP to GND</li>
+            </>
+          )
+          
+        ]
+      },
+      {
+        id: "IQ_Demodulator_Cadence",
+        img: IQ_Demodulator_Cadence_Image,
+        title: "IQ Demodulator on Cadence",
+        description: "Cadence Implementation",
+        detailedDescription: (
+          <>
+            <p>
+              The IQ demodulator converts the recovered 1 GHz IF into baseband In-Phase (I) and
+              Quadrature (Q) components. The common IF signal is first buffered using
+              <strong> source followers</strong>, which provide isolation from the preceding filter while
+              simultaneously level-shifting the signal to the appropriate common-mode voltage for the
+              mixers.
+            </p>
+
+            <p>
+              The buffered IF is then split into I and Q paths using
+              <strong> Folded Gilbert Cell mixers</strong>, driven by the quadrature outputs of the 1 GHz
+              Ring VCO. The mixers are optimized for 1 GHz downconversion, producing the corresponding
+              baseband I and Q components.
+            </p>
+
+            <p>
+              Each mixer output is passed through a <strong>200 MHz Gm-C low-pass filter</strong> to
+              remove high-frequency mixing products while preserving the desired baseband signal.
+              Feedback for the Costas FLL/PLL is taken directly after these filters, allowing carrier
+              recovery to operate on the actual demodulated signal.
+            </p>
+
+            <p>
+              Following the feedback tap, the filtered I and Q signals are buffered to provide isolated
+              outputs for the final baseband interface and measurement.
+            </p>
+          </>
+        )
+      }
 
     ]
+  },
+  {
+    id: "Ring_VCO",
+    img: Ring_VCO_Image,
+    title: "1 GHz Ring VCO",
+    description: "1 GHz Ring VCO used in IQ Demodulator",
+    detailedDescription: (
+      <>
+        <p>
+          The 1 GHz Ring VCO generates the local oscillator required for the final IQ demodulation
+          stage. Because the mixers require differential LO signals, the oscillator is implemented
+          using <strong> current-mode logic (CML)</strong>. Each differential inverter consists of a
+          differential NMOS pair with PMOS loads, providing differential gain and the polarity
+          inversion required for ring oscillation.
+        </p>
+
+        <p>
+          Load capacitors establish the nominal oscillation frequency, while voltage-controlled
+          capacitors (varactors) provide frequency tuning. The control signal generated by the
+          Costas FLL/PLL therefore adjusts the VCO frequency to compensate for the residual
+          frequency and phase error in the recovered carrier.
+        </p>
+
+        <p>
+          The ring topology also provides a convenient method for generating the quadrature LO
+          signals required by the IQ demodulator. Each inverter stage introduces approximately
+          45° of phase progression at the nominal oscillation frequency. Tapping the oscillator
+          after two stages therefore produces an approximately 90° phase-shifted
+          <strong> Quadrature (Q)</strong> signal, while tapping after four stages provides the
+          <strong> In-Phase (I)</strong> signal.
+        </p>
+
+        <p>
+          By reversing the polarity of the final differential stage, the required 360° phase
+          progression can be realized using only four inverter stages, reducing the number of
+          active devices while maintaining the required differential I/Q relationship.
+        </p>
+      </>
+    ),
+      subsystems: [
+        {
+        id: "Ring_Amp",
+        img: Ring_Amp_Image,
+        title: "Ring Amplifier",
+        description: "Current-Mode NOT gate",
+        detailedDescription: (
+            <>
+              <p>
+                The ring amplifier implements the current-mode differential inverter used throughout the
+                1 GHz Ring VCO. The topology uses a simple <strong>differential pair with active loads </strong>
+                to provide differential gain and polarity inversion while maintaining the current-mode
+                operation required by the oscillator.
+              </p>
+
+              <p>
+                A differential load capacitor controls the phase progression between stages and therefore
+                directly influences the oscillator's total frequency. The active loads and differential
+                pair tail are controlled through global PMOS and NMOS bias voltages, allowing the same bias
+                signals to be shared across oscillator stages and significantly reducing the area required
+                for local bias circuitry.
+              </p>
+            </>
+          )
+        }
+      ]
   },
 ];

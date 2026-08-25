@@ -127,16 +127,18 @@ export const SchematicDetail = () => {
         </Row>
 
         {/* Design Notes */}
-        <Row className="mb-5">
-          <Col lg="10">
-            <h3 className="color_sec py-4">Design Notes</h3>
-            <ul className="design_notes_list">
-              {currentDetail.designNotes.map((note, i) => (
-                <li key={i}>{note}</li>
-              ))}
-            </ul>
-          </Col>
-        </Row>
+        {currentDetail.designNotes?.length > 0 && (
+          <Row className="mb-5">
+            <Col lg="10">
+              <h3 className="color_sec py-4">Design Notes</h3>
+              <ul className="design_notes_list">
+                {currentDetail.designNotes.map((note, i) => (
+                  <li key={i}>{note}</li>
+                ))}
+              </ul>
+            </Col>
+          </Row>
+        )}
 
         {/* Render a gallery only for items that actually have child systems. */}
         {currentDetail.subsystems && currentDetail.subsystems.length > 0 && (

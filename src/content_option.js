@@ -1,7 +1,7 @@
 import VacQLockImage from "./assets/images/VacQLockImage.jpg";
 //import FR3YAImage from "./assets/images/FR3YA.png";
 //import LOKIImage from "./assets/images/LOKI.png";
-import MEImage from "./assets/images/Brenden_Jojo.png";
+import MEImage from "./assets/images/Me.jpeg";
 
 const logotext = "Brenden";
 const meta = {
