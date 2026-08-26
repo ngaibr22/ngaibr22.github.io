@@ -105,7 +105,7 @@ export const SchematicDetail = () => {
         {currentDetail.subsystems?.length > 0 && (
           <Row className="project-section">
             <Col lg="12">
-              <h3 className="color_sec">Sub-systems</h3>
+              <h3 className="color_sec">Related Work</h3>
               <div className="schematics_gallery">
                 {currentDetail.subsystems.map((subsystem) => (
                   <div
