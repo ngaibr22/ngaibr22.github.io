@@ -12,9 +12,9 @@ const meta = {
 const introdata = {
     title: "I’m Brenden Ngai",
     animated: {
-        first: "Aspiring Electrical Engineer",
-        second: "Silicon Enthusiast",
-        third: "Good Things Come in Microelectronic Packages",
+        first: "aspiring IC designer",
+        second: "building what comes next",
+        third: "the guy on the picture",
     },
     description: "",
     your_img_url: MEImage,

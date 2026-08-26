@@ -16,19 +16,55 @@ export const ContactUs = () => {
     variant: "",
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const subject = `Portfolio message from ${formData.name}`;
-    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`;
-    const mailtoUrl = `mailto:${contactConfig.YOUR_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setFormdata((currentFormData) => ({
+      ...currentFormData,
+      loading: true,
+      show: false,
+    }));
 
-    window.location.href = mailtoUrl;
-    setFormdata({
-      ...formData,
-      alertmessage: "Your email client should open with this message addressed to me.",
-      variant: "success",
-      show: true,
-    });
+    const form = e.currentTarget;
+    const formDataToSend = new FormData(form);
+    formDataToSend.append(
+      "_subject",
+      `Portfolio message from ${formData.name}`
+    );
+
+    try {
+      const response = await fetch(
+        `https://formsubmit.co/ajax/${contactConfig.YOUR_EMAIL}`,
+        {
+          method: "POST",
+          body: formDataToSend,
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("The message could not be sent.");
+      }
+
+      setFormdata({
+        email: "",
+        name: "",
+        message: "",
+        loading: false,
+        alertmessage: "Message sent successfully.",
+        variant: "success",
+        show: true,
+      });
+    } catch {
+      setFormdata((currentFormData) => ({
+        ...currentFormData,
+        loading: false,
+        alertmessage: "The message could not be sent. Please try again.",
+        variant: "danger",
+        show: true,
+      }));
+    }
   };
 
   const handleChange = (e) => {
@@ -126,7 +162,11 @@ export const ContactUs = () => {
               <br />
               <Row>
                 <Col lg="12" className="form-group">
-                  <button className="btn ac_btn" type="submit">
+                  <button
+                    className="btn ac_btn"
+                    type="submit"
+                    disabled={formData.loading}
+                  >
                     {formData.loading ? "Sending..." : "Send"}
                   </button>
                 </Col>

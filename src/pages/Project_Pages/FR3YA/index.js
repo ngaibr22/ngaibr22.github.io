@@ -52,12 +52,12 @@ export const FR3YA = () => {
             <p className="sys_description">
               <p>
                 <p>
-                    FR3YA is a 24&nbsp;GHz RFIC implementing a <strong>vector-modulated phase shifter</strong>.
+                    FR3YA is a 24&nbsp;GHz RFIC implementing a vector-modulated phase shifter.
                     An incoming RF signal is first split into In-Phase (I) and Quadrature (Q) components
-                    using an on-chip <strong>Lange coupler</strong>. Each branch then passes through an active
+                    using an on-chip Lange coupler. Each branch then passes through an active
                     balun for single-ended-to-differential conversion, followed by a variable-gain
                     amplifier and polarity switch, before the I and Q paths are recombined using a
-                    <strong>Wilkinson power combiner</strong>.
+                    Wilkinson power combiner.
                     </p>
 
                     <p>
@@ -68,8 +68,15 @@ export const FR3YA = () => {
                     </p>
 
                     <p>
+                    FR3YA also reuses the on-chip calibration methodology developed for LOKI.
+                    Calibration standards are integrated directly onto the RFIC, enabling
+                    monolithic calibration and characterization of the phase-shifter
+                    circuitry without relying exclusively on external calibration structures.
+                    </p>
+
+                    <p>
                     Building on my full-custom layout experience from LOKI, I was given
-                    <strong>full layout ownership of the polarity-switch and bias subsystems</strong>.
+                    <strong> full layout ownership of the polarity-switch and bias subsystems</strong>.
                     These blocks were particularly critical because the polarity switch directly controls
                     the phase of one of the vector components and therefore affects the performance of the
                     complete phase-shifting chain.
@@ -77,7 +84,7 @@ export const FR3YA = () => {
 
                     <p>
                     My responsibilities extended beyond physical implementation into
-                    <strong>schematic and post-layout optimization</strong>. I added and tuned passive
+                    <strong> schematic and post-layout optimization</strong>. I added and tuned passive
                     elements, optimized interconnect geometry, and iterated between schematic simulation
                     and extracted-layout results to recover performance lost to parasitics. This process
                     provided practical experience with matching, coupling-capacitance mitigation,
@@ -91,22 +98,22 @@ export const FR3YA = () => {
         <Row className="project-section">
           <Col lg="10">
             <h3 className="color_sec">System Specifications</h3>
-            <p className="sys_description">
-              Add an overview of the FR3YA architecture, design goals, and
-              implementation here.
-            </p>
             <div className="system_specs">
               <div className="spec_item">
-                <h5>Frequency Range</h5>
-                <p>Add frequency range and key specifications.</p>
+                <h5>Operating Frequency</h5>
+                <p>24 GHz</p>
               </div>
               <div className="spec_item">
-                <h5>Key Stages</h5>
-                <p>Add the major circuit blocks and signal path.</p>
+                <h5>Ownership</h5>
+                <p>Polarity Switch</p>
+                <p>Bias Network</p>
+                <p>Calibration Standards</p>
               </div>
               <div className="spec_item">
                 <h5>Technology &amp; Software</h5>
-                <p>Add process technology and design tools.</p>
+                <p>UMC 28nm CMOS</p>
+                <p>Cadence Virtuoso</p>
+                <p>peakView EM Solver</p>
               </div>
             </div>
           </Col>
@@ -114,8 +121,8 @@ export const FR3YA = () => {
 
         <Row className="project-section">
           <Col lg="12">
-            <h3 className="color_sec">Individual Systems</h3>
-            <p>Add the individual FR3YA circuit blocks and their descriptions here.</p>
+            <h3 className="color_sec">Individual Contributions</h3>
+            <p>Various contributions to the FR3YA project. Click on the cards to learn more</p>
             <div className="schematics_gallery">
               {schematics.map((schematic) => (
                 <div
@@ -147,17 +154,6 @@ export const FR3YA = () => {
                 </div>
               ))}
             </div>
-          </Col>
-        </Row>
-
-        <Row className="project-section">
-          <Col lg="10">
-            <h3 className="color_sec">Performance Highlights</h3>
-            <ul className="performance_list">
-              <li>Add a project highlight here.</li>
-              <li>Add measured or simulated results here.</li>
-              <li>Add implementation notes here.</li>
-            </ul>
           </Col>
         </Row>
       </Container>

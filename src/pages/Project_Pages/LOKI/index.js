@@ -32,7 +32,7 @@ export const LOKI = () => {
             <hr className="t_border" />
           </Col>
         </Row>
-        
+
         <Row className="project-section">
           <Col lg="12">
             <div className="block_diagram_container">
@@ -91,6 +91,7 @@ export const LOKI = () => {
                 </div>
               <div className="spec_item">
                 <h5>Technology &amp; Software</h5>
+                <p>UMC 28nm CMOS</p>
                 <p>Ansys HFSS</p>
                 <p>Python</p>
                 <p>Cadence Virtuoso</p>
@@ -102,7 +103,7 @@ export const LOKI = () => {
         <Row className="project-section">
           <Col lg="12">
             <h3 className="color_sec">Individual Contributions</h3>
-            <p>Various contributions to the LOKI Project. Click on the cards to learn more</p>
+            <p>Various contributions to the LOKI project. Click on the cards to learn more</p>
             <div className="schematics_gallery">
               {schematics.map((schematic) => (
                 <div
